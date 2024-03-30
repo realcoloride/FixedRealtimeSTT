@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: RealTimeSTT
-Version: 0.1.11
+Version: 0.1.8
 Summary: A fast Voice Activity Detection and Transcription System
 Home-page: https://github.com/KoljaB/RealTimeSTT
 Author: Kolja Beigel
@@ -11,14 +11,13 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
-License-File: LICENSE
 Requires-Dist: PyAudio==0.2.14
-Requires-Dist: faster-whisper==1.0.1
+Requires-Dist: faster-whisper==0.10.0
 Requires-Dist: pvporcupine==1.9.5
 Requires-Dist: webrtcvad==2.0.10
 Requires-Dist: halo==0.0.31
-Requires-Dist: torch==2.1.2
-Requires-Dist: torchaudio==2.1.2
+Requires-Dist: torch==2.1.1
+Requires-Dist: torchaudio==2.1.1
 
 
 # RealtimeSTT
@@ -38,17 +37,6 @@ https://github.com/KoljaB/RealtimeSTT/assets/7604638/207cb9a2-4482-48e7-9d2b-072
 
 ### Updates
 
-#### v0.1.9
-- switched to torch.multiprocessing
-- added compute_type, input_device_index and gpu_device_index parameters
-- recorder.text() interruptable with recorder.abort()
-- fix for #20
-
-#### v0.1.8
-- added [example](https://github.com/KoljaB/RealtimeSTT/tree/master/example_browserclient) how to realtime transcribe from browser microphone
-- large-v3 whisper model now supported (upgrade to faster_whisper 0.10.0)
-- added feed_audio() and use_microphone parameter to feed chunks
-
 #### v0.1.7
 - Bugfix for Mac OS Installation (multiprocessing / queue.size())
 - KeyboardInterrupt handling (now abortable with CTRL+C)
@@ -59,6 +47,7 @@ https://github.com/KoljaB/RealtimeSTT/assets/7604638/207cb9a2-4482-48e7-9d2b-072
 - Bugfix for resource management in shutdown method
 
 #### v0.1.5
+
 - Bugfix for detection of short speech right after sentence detection (the problem mentioned in the video)
 - Main transcription and recording moved into separate process contexts with multiprocessing
 
@@ -211,14 +200,6 @@ recorder = AudioToTextRecorder(on_recording_start=my_start_callback,
                                on_recording_stop=my_stop_callback)
 ```
 
-### Feed chunks
-
-If you don't want to use the local microphone set use_microphone parameter to false and provide raw PCM audiochunks in 16-bit mono (samplerate 16000) with this method:
-
-```python
-recorder.feed_audio(audio_chunk)
-```
-
 ### Shutdown
 
 You can shutdown the recorder safely by using the context manager protocol:
@@ -280,13 +261,7 @@ When you initialize the `AudioToTextRecorder` class, you have various options to
     - Options: 'tiny', 'tiny.en', 'base', 'base.en', 'small', 'small.en', 'medium', 'medium.en', 'large-v1', 'large-v2'.
     - Note: If a size is provided, the model will be downloaded from the Hugging Face Hub.
 
-- **language** (str, default=""): Language code for transcription. If left empty, the model will try to auto-detect the language. Supported language codes are listed in [Whisper Tokenizer library](https://github.com/openai/whisper/blob/main/whisper/tokenizer.py).
-
-- **compute_type** (str, default="default"): Specifies the type of computation to be used for transcription. See [Whisper Quantization](https://opennmt.net/CTranslate2/quantization.html)
-
-- **input_device_index** (int, default=0): Audio Input Device Index to use.
-
-- **gpu_device_index** (int, default=0): GPU Device Index to use. The model can also be loaded on multiple GPUs by passing a list of IDs (e.g. [0, 1, 2, 3]).
+- **language** (str, default=""): Language code for transcription. If left empty, the model will try to auto-detect the language.
 
 - **on_recording_start**: A callable function triggered when recording starts.
 
@@ -297,8 +272,6 @@ When you initialize the `AudioToTextRecorder` class, you have various options to
 - **ensure_sentence_starting_uppercase** (bool, default=True): Ensures that every sentence detected by the algorithm starts with an uppercase letter.
 
 - **ensure_sentence_ends_with_period** (bool, default=True): Ensures that every sentence that doesn't end with punctuation such as "?", "!" ends with a period
-
-- **use_microphone** (bool, default=True): Usage of local microphone for transcription. Set to False if you want to provide chunks with feed_audio method.
 
 - **spinner** (bool, default=True): Provides a spinner animation text with information about the current recorder state.
 
