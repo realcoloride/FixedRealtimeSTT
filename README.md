@@ -3,6 +3,11 @@
 
 *Easy-to-use, low-latency speech-to-text library for realtime applications*
 
+## About the Fork
+
+After multiple desperate tries of installing the package and much dependency hell, I decided to fork just to fix the dependencies or issues I face with this package.
+![image](https://github.com/realcoloride/FixedRealtimeSTT/assets/108619637/0ba95a5e-886c-47dc-9a72-af838051c746)
+
 ## About the Project
 
 RealtimeSTT listens to the microphone and transcribes voice into text.  
@@ -68,7 +73,8 @@ This library uses:
 ## Installation
 
 ```bash
-pip install RealtimeSTT
+pip install git+https://github.com/realcoloride/FixedRealtimeSTT.git
+
 ```
 
 This will install all the necessary dependencies, including a **CPU support only** version of PyTorch.
