@@ -1,3 +1,25 @@
+Metadata-Version: 2.1
+Name: RealTimeSTT
+Version: 0.1.11
+Summary: A fast Voice Activity Detection and Transcription System
+Home-page: https://github.com/KoljaB/RealTimeSTT
+Author: Kolja Beigel
+Author-email: kolja.beigel@web.de
+Keywords: real-time,audio,transcription,speech-to-text,voice-activity-detection,VAD,real-time-transcription,ambient-noise-detection,microphone-input,faster_whisper,speech-recognition,voice-assistants,audio-processing,buffered-transcription,pyaudio,ambient-noise-level,voice-deactivity
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: PyAudio==0.2.14
+Requires-Dist: faster-whisper==1.0.1
+Requires-Dist: pvporcupine==1.9.5
+Requires-Dist: webrtcvad==2.0.10
+Requires-Dist: halo==0.0.31
+Requires-Dist: torch==2.1.2
+Requires-Dist: torchaudio==2.1.2
+
 
 # RealtimeSTT
 
